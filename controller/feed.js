@@ -1,14 +1,11 @@
 const { validationResult } = require("express-validator");
 const validator = require("validator");
 const moment = require("moment");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 const User = require("../model/user");
 const Medicine = require("../model/medicine");
 const Prescription = require("../model/prescription");
-
-const ObjectId = require("mongoose").Types.ObjectId;
-const { request } = require("express");
-const { findById } = require("../model/user");
 
 exports.createProfile = async (req, res, next) => {
   try {
@@ -224,6 +221,71 @@ exports.getSpecific = async (req, res, next) => {
       message: "success",
       allMedicines,
       medicinesData,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updateStatus = async (req, res, next) => {
+  try {
+    const time = req.query.time;
+    const status = req.query.status;
+    console.log(status + "  " + time);
+    // if (status !== "complete" || status !== "pending" || status !== "failed") {
+    //   const error = new Error("Invalid status");
+    //   error.statusCode = 422;
+    //   throw error;
+    // }
+    const userId = req.body.userId;
+    if (!ObjectId.isValid(userId)) {
+      const error = new Error("Invalid userId");
+      error.statusCode = 422;
+      throw error;
+    }
+    const user = await User.findById(userId).exec();
+    if (!user) {
+      const error = new Error("user not exists.");
+      error.statusCode = 422;
+      throw error;
+    }
+
+    const medicineId = req.body.medicineId;
+    if (!ObjectId.isValid(medicineId)) {
+      const error = new Error("Invalid medicineId");
+      error.statusCode = 422;
+      throw error;
+    }
+    let medicine = await Medicine.findById(medicineId).exec();
+    if (!medicine) {
+      const error = new Error("medicine not exists.");
+      error.statusCode = 422;
+      throw error;
+    }
+
+    const prescription = await User.findById(userId)
+      .select("prescriptionId")
+      .populate("prescriptionId");
+
+    const medicineList = prescription.prescriptionId.medicines;
+
+    for (const med of medicineList) {
+      if (med.medicineId.toString() === medicineId.toString()) {
+        // console.log("Id match");
+        med.Timings.forEach((drug) => {
+          if (drug.time === time) {
+            drug.status = status;
+          }
+        });
+      }
+    }
+
+    prescription.prescriptionId.medicines = medicineList;
+    const updatedStatus = await prescription.save();
+
+    res.status(201).json({
+      message: "success",
+      updatedStatus,
     });
   } catch (err) {
     next(err);

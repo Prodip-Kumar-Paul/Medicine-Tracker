@@ -42,19 +42,8 @@ router.post(
   feedController.addMedicine
 );
 
-router.post(
-  "/new-prescription",
-  // [
-  //   body("quantity")
-  //     .trim()
-  //     .notEmpty()
-  //     .withMessage("please enter some quantity"),
-  //   body("numberOfTimes")
-  //     .isNumeric()
-  //     .withMessage("please enter a valid times."),
-  // ],
-  // presValidator,
-  feedController.newPrescription
-);
+router.post("/new-prescription", feedController.newPrescription);
+
+router.post("/medicine-status", feedController.updateStatus);
 
 module.exports = router;
