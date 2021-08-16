@@ -159,7 +159,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/specific-date?date=2021-08-20",
+					"raw": "http://localhost:8080/specific-date?date=2021-08-18",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -171,7 +171,7 @@
 					"query": [
 						{
 							"key": "date",
-							"value": "2021-08-20"
+							"value": "2021-08-18"
 						}
 					]
 				}
@@ -206,7 +206,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/medicine-status?status=pending&time=10AM",
+					"raw": "http://localhost:8080/medicine-status?status=complete&time=10AM",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -218,7 +218,7 @@
 					"query": [
 						{
 							"key": "status",
-							"value": "pending"
+							"value": "complete"
 						},
 						{
 							"key": "time",
