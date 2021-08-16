@@ -232,11 +232,13 @@ exports.updateStatus = async (req, res, next) => {
     const time = req.query.time;
     const status = req.query.status;
     console.log(status + "  " + time);
-    // if (status !== "complete" || status !== "pending" || status !== "failed") {
-    //   const error = new Error("Invalid status");
-    //   error.statusCode = 422;
-    //   throw error;
-    // }
+    if (
+      !(status === "complete" || status === "pending" || status === "failed")
+    ) {
+      const error = new Error("Invalid status");
+      error.statusCode = 422;
+      throw error;
+    }
     const userId = req.body.userId;
     if (!ObjectId.isValid(userId)) {
       const error = new Error("Invalid userId");
@@ -269,14 +271,21 @@ exports.updateStatus = async (req, res, next) => {
 
     const medicineList = prescription.prescriptionId.medicines;
 
+    let found = false;
     for (const med of medicineList) {
       if (med.medicineId.toString() === medicineId.toString()) {
         // console.log("Id match");
         med.Timings.forEach((drug) => {
           if (drug.time === time) {
+            found = true;
             drug.status = status;
           }
         });
+        if (!found) {
+          const error = new Error("Invalid time.");
+          error.statusCode = 422;
+          throw error;
+        }
       }
     }
 
