@@ -2,7 +2,8 @@ const express = require("express");
 const { body } = require("express-validator");
 
 const feedController = require("../controller/feed");
-const presValidator = require("../middleware/validator/presValidator");
+const detailValidator = require("../middleware/validator/details");
+const statusValidator = require("../middleware/validator/status");
 
 const router = express.Router();
 
@@ -42,8 +43,12 @@ router.post(
   feedController.addMedicine
 );
 
-router.post("/new-prescription", feedController.newPrescription);
+router.post(
+  "/new-prescription",
+  detailValidator,
+  feedController.newPrescription
+);
 
-router.post("/medicine-status", feedController.updateStatus);
+router.post("/medicine-status", statusValidator, feedController.updateStatus);
 
 module.exports = router;

@@ -89,11 +89,7 @@ exports.addMedicine = async (req, res, next) => {
 exports.newPrescription = async (req, res, next) => {
   try {
     const userId = req.body.userId;
-    if (!ObjectId.isValid(userId)) {
-      const error = new Error("Invalid userId");
-      error.statusCode = 422;
-      throw error;
-    }
+
     const user = await User.findById(userId).exec();
     if (!user) {
       const error = new Error("user not exists.");
@@ -231,20 +227,9 @@ exports.updateStatus = async (req, res, next) => {
   try {
     const time = req.query.time;
     const status = req.query.status;
-    console.log(status + "  " + time);
-    if (
-      !(status === "complete" || status === "pending" || status === "failed")
-    ) {
-      const error = new Error("Invalid status");
-      error.statusCode = 422;
-      throw error;
-    }
+
     const userId = req.body.userId;
-    if (!ObjectId.isValid(userId)) {
-      const error = new Error("Invalid userId");
-      error.statusCode = 422;
-      throw error;
-    }
+
     const user = await User.findById(userId).exec();
     if (!user) {
       const error = new Error("user not exists.");
@@ -253,11 +238,7 @@ exports.updateStatus = async (req, res, next) => {
     }
 
     const medicineId = req.body.medicineId;
-    if (!ObjectId.isValid(medicineId)) {
-      const error = new Error("Invalid medicineId");
-      error.statusCode = 422;
-      throw error;
-    }
+
     let medicine = await Medicine.findById(medicineId).exec();
     if (!medicine) {
       const error = new Error("medicine not exists.");
