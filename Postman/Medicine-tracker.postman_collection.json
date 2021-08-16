@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Test\",\r\n    \"email\": \"test@test.com\",\r\n    \"age\": 12\r\n}",
+					"raw": "{\r\n    \"name\": \"Test\",\r\n    \"email\": \"testing@test.com\",\r\n    \"age\": 12\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"CalpoL\",\r\n    \"description\": \"its use for high fever\",\r\n    \"type\": \"tablet\"\r\n}",
+					"raw": "{\r\n    \"name\": \"saridon\",\r\n    \"description\": \"its use for reduce headache\",\r\n    \"type\": \"tablet\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
