@@ -273,7 +273,7 @@ exports.updateStatus = async (req, res, next) => {
     prescription.prescriptionId.medicines = medicineList;
     const updatedStatus = await prescription.save();
 
-    res.status(201).json({
+    res.status(200).json({
       message: "success",
       updatedStatus,
     });

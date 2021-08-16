@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "12ccc7f3-e5c4-451b-9618-7d179e4cfec3",
+		"name": "Medicine-tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"create user profile test\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test\",\r\n    \"email\": \"test@test.com\",\r\n    \"age\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/create-profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Medicine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"add medicine test\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"CalpoL\",\r\n    \"description\": \"its use for high fever\",\r\n    \"type\": \"tablet\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/add-medicine",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add-medicine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Prescription",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"new prescription test\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"6117d6a0fa98c54e944f7abe\",\r\n    \"medicines\": [\r\n        {\r\n            \"medicineId\": \"6117e0a340f6cd53609209a2\",\r\n            \"quantity\": \"10ML\",\r\n            \"startDate\": \"2021-08-16\",\r\n            \"endDate\": \"2021-08-19\",\r\n            \"numberOfTimes\": 3,\r\n            \"Timings\": [\r\n                {\r\n                    \"time\": \"9AM\",\r\n                    \"status\": \"complete\"\r\n                },\r\n                {\r\n                    \"time\": \"11PM\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"medicineId\": \"6117e0edbbb4e53bac9e6bef\",\r\n            \"quantity\": \"1\",\r\n            \"startDate\": \"2021-08-17\",\r\n            \"endDate\": \"2021-08-20\",\r\n            \"numberOfTimes\": 3,\r\n            \"Timings\": [\r\n                {\r\n                    \"time\": \"10AM\",\r\n                    \"status\": \"complete\"\r\n                },\r\n                {\r\n                    \"time\": \"12PM\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/new-prescription",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"new-prescription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"specific date test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"6117d6a0fa98c54e944f7abe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/specific-date?date=2021-08-20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"specific-date"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2021-08-20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update medicine status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"update status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"6117d6a0fa98c54e944f7abe\",\r\n    \"medicineId\": \"6117e0edbbb4e53bac9e6bef\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/medicine-status?status=pending&time=10AM",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicine-status"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "pending"
+						},
+						{
+							"key": "time",
+							"value": "10AM"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
